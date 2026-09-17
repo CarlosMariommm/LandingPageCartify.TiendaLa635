@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda la 635 — El súper de la esquina, a un click</title>
+    <meta
+      name="description"
+      content="Frutas, snacks, bebidas e impresiones. Compre desde la web, la app o hablándole al asistente de voz, y siga su pedido hasta la puerta."
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:title" content="Tienda la 635 — El súper de la esquina, a un click" />
+    <meta property="og:description" content="Compre en línea, por voz o desde la app. Siga su pedido en el mapa y junte puntos con cada compra." />
+    <meta property="og:image" content="/video/poster2.jpg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+
+  <body class="is-loading">
+    <!-- ============ PANTALLA DE CARGA ============ -->
+    <div class="loader" aria-hidden="true">
+      <div class="loader__inner">
+        <div class="loader__mark" data-logo></div>
+        <div class="loader__word">
+          <span class="mask"><span>Tienda</span></span>
+          <span class="mask"><span>la 635</span></span>
+        </div>
+        <div class="loader__bar"><i></i></div>
+      </div>
+    </div>
+
+    <div class="progress" aria-hidden="true"><i></i></div>
+
+    <!-- ============ NAVEGACIÓN ============ -->
+    <header class="nav" data-nav>
+      <a class="brand" href="#inicio" aria-label="Tienda la 635, ir al inicio">
+        <span data-logo></span>
+        <span class="brand__word"><b>Tienda</b><b>la 635</b></span>
+      </a>
+      <nav class="nav__links" aria-label="Secciones">
+        <a href="#tienda" data-link>Tienda</a>
+        <a href="#asistente" data-link>Asistente</a>
+        <a href="#beneficios" data-link>Beneficios</a>
+        <a href="#impresiones" data-link>Impresiones</a>
+        <a href="#app" data-link>App</a>
+        <a href="#panel" data-link>Panel</a>
+      </nav>
+      <a class="btn btn--light btn--sm nav__cta" href="https://cartify-tienda-la635.vercel.app/" target="_blank" rel="noopener" data-store-link>
+        Ir a la tienda <i data-icon="arrow-up-right"></i>
+      </a>
+      <button class="nav__burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu" data-burger>
+        <span></span><span></span>
+      </button>
+    </header>
+
+    <div class="menu" id="menu" data-menu hidden>
+      <nav class="menu__links" aria-label="Menú">
+        <a href="#tienda">Tienda</a>
+        <a href="#asistente">Asistente</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#impresiones">Impresiones</a>
+        <a href="#app">App</a>
+        <a href="#panel">Panel</a>
+      </nav>
+      <a class="btn btn--light btn--lg" href="https://cartify-tienda-la635.vercel.app/" target="_blank" rel="noopener" data-store-link>
+        Ir a la tienda <i data-icon="arrow-up-right"></i>
+      </a>
+    </div>
+
+    <main>
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="inicio" data-theme="dark">
+        <div class="hero__bg" aria-hidden="true">
+          <div class="glow glow--a"></div>
+          <div class="glow glow--b"></div>
+          <div class="grid-lines"></div>
+        </div>
+
+        <div class="container hero__inner">
+          <div class="hero__copy">
+            <p class="eyebrow" data-hero-fade><span class="dot"></span> Abierto en línea · Hecho en El Salvador</p>
+            <h1 class="hero__title">
+              <span class="line"><span class="line__in">El súper de</span></span>
+              <span class="line"><span class="line__in">la esquina,</span></span>
+              <span class="line line--accent">
+                <span class="line__in">
+                  <span class="grad">a un click.</span>
+                  <svg class="squiggle" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M4 16 C 50 4, 90 4, 130 13 S 220 22, 296 8" />
+                  </svg>
+                </span>
+              </span>
+            </h1>
+            <p class="hero__sub" data-hero-fade>
+              Frutas frescas, snacks, bebidas e impresiones. Compre desde la web, la app o hablándole al asistente,
+              y siga su pedido hasta la puerta.
+            </p>
+            <div class="hero__actions" data-hero-fade>
+              <a class="btn btn--light btn--lg magnetic" href="#tienda">Probar la tienda <i data-icon="arrow-right"></i></a>
+              <button class="btn btn--ghost btn--lg magnetic" type="button" data-open-trailer>
+                <span class="btn__play"><i data-icon="play"></i></span> Ver el trailer
+              </button>
+            </div>
+            <ul class="hero__channels" data-hero-fade>
+              <li><i data-icon="monitor"></i> Web</li>
+              <li><i data-icon="phone"></i> App móvil</li>
+              <li><i data-icon="mic"></i> Kiosco por voz</li>
+            </ul>
+          </div>
+
+          <div class="hero__visual" data-tilt-area aria-hidden="true">
+            <div class="browser" data-tilt>
+              <div class="browser__bar">
+                <span></span><span></span><span></span>
+                <div class="browser__url">cartify-tienda-la635.vercel.app</div>
+              </div>
+              <div class="browser__body">
+                <div class="mini-top">
+                  <div class="mini-word"><b>Tienda</b><b>la 635</b></div>
+                  <div class="mini-search"><i data-icon="search"></i> Buscar productos…</div>
+                  <div class="mini-cart"><i data-icon="cart"></i><span data-hero-badge>2</span></div>
+                  <div class="mini-voice"><i data-icon="mic"></i> Asistente</div>
+                </div>
+                <div class="mini-ribbon">Pura fruta jugosa, recién llegada</div>
+                <div class="mini-pills"><span class="is-on">Todos</span><span>Frutas</span><span>Snacks</span><span>Bebidas</span></div>
+                <div class="mini-grid">
+                  <div class="mini-card"><div class="mini-img"><img src="/img/manzana.webp" alt="" /></div><p>Manzana</p><div class="mini-row"><b>$5.20</b><em>+</em></div></div>
+                  <div class="mini-card"><div class="mini-img"><img src="/img/uvas-verdes.webp" alt="" /></div><p>Uvas verdes</p><div class="mini-row"><b>$5.20</b><em>+</em></div></div>
+                  <div class="mini-card"><div class="mini-img"><img src="/img/pera.png" alt="" /></div><p>Pera</p><div class="mini-row"><b>$1.60</b><em>+</em></div></div>
+                  <div class="mini-card"><div class="mini-img"><img src="/img/coca-cola.png" alt="" /></div><p>Coca-Cola</p><div class="mini-row"><b>$1.25</b><em>+</em></div></div>
+                  <div class="mini-card"><div class="mini-img"><img src="/img/takis-originales.png" alt="" /></div><p>Takis</p><div class="mini-row"><b>$1.00</b><em>+</em></div></div>
+                  <div class="mini-card"><div class="mini-img"><img src="/img/pringles-originales.png" alt="" /></div><p>Pringles</p><div class="mini-row"><b>$0.75</b><em>+</em></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="float float--sandia" data-depth="40"><img src="/img/sanda.png" alt="" /></div>
+            <div class="float float--coca" data-depth="-30"><img src="/img/coca-cola.png" alt="" /></div>
+            <div class="float float--cheetos" data-depth="24"><img src="/img/cheetos-crunchy.png" alt="" /></div>
+            <div class="float float--uvas" data-depth="-46"><img src="/img/uvas-verdes.webp" alt="" /></div>
+
+            <div class="hchip hchip--added">
+              <span class="hchip__ic hchip__ic--ok"><i data-icon="check"></i></span>
+              <span><b>Coca-Cola agregada</b><small>+1 al carrito</small></span>
+            </div>
+            <div class="hchip hchip--eta">
+              <span class="hchip__ic"><i data-icon="truck"></i></span>
+              <span><b>Su pedido va en camino</b><small>Llega en 12 min</small></span>
+            </div>
+            <div class="hchip hchip--pts">
+              <span class="hchip__ic hchip__ic--star"><i data-icon="star"></i></span>
+              <span><b>+25 puntos</b><small>por su compra</small></span>
+            </div>
+          </div>
+        </div>
+
+        <a class="scroll-cue" href="#tienda" aria-label="Bajar a la tienda">
+          <span class="scroll-cue__mouse"><i></i></span> Deslice
+        </a>
+      </section>
+
+      <!-- ============ CINTA ============ -->
+      <section class="marquee" aria-label="Lo que encuentra en la tienda">
+        <div class="marquee__tilt">
+          <div class="marquee__row" data-dir="1"><div class="marquee__track" data-marquee="a"></div></div>
+          <div class="marquee__row marquee__row--outline" data-dir="-1"><div class="marquee__track" data-marquee="b"></div></div>
+        </div>
+      </section>
+
+      <!-- ============ 01 TIENDA INTERACTIVA ============ -->
+      <section class="section section--paper" id="tienda">
+        <div class="container">
+          <header class="section__head section__head--split">
+            <div>
+              <p class="kicker"><span>01</span> La tienda</p>
+              <h2 class="title" data-split>Navegue, toque, <em>listo.</em></h2>
+            </div>
+            <p class="lead" data-fade>
+              Categorías al instante, productos con un toque y un carrito que se arma sin recargar la página.
+              Así se siente comprar en Tienda la 635: pruébelo aquí abajo.
+            </p>
+          </header>
+
+          <div class="demo" data-store data-reveal>
+            <div class="demo__top">
+              <div class="demo__brand"><span data-logo></span><span class="brand__word brand__word--ink"><b>Tienda</b><b>la 635</b></span></div>
+              <label class="demo__search">
+                <i data-icon="search"></i>
+                <input type="search" placeholder="Buscar productos…" aria-label="Buscar productos" data-search autocomplete="off" />
+              </label>
+              <button class="demo__cart" type="button" aria-label="Abrir carrito" data-open-cart>
+                <i data-icon="cart"></i><span class="badge" data-badge>0</span>
+              </button>
+            </div>
+
+            <div class="pills" role="tablist" aria-label="Categorías" data-pills>
+              <span class="pills__ind" aria-hidden="true" data-pill-ind></span>
+            </div>
+
+            <div class="demo__grid" data-grid></div>
+            <p class="demo__empty" data-empty hidden>
+              No encontramos “<span data-empty-q></span>”. Pruebe con <button type="button" data-try="takis">takis</button> o
+              <button type="button" data-try="uvas">uvas</button>.
+            </p>
+
+            <div class="demo__scrim" data-close-cart></div>
+            <aside class="drawer" aria-label="Carrito" data-drawer>
+              <div class="drawer__head">
+                <h3>Su carrito</h3>
+                <button class="icon-btn" type="button" aria-label="Cerrar carrito" data-close-cart><i data-icon="x"></i></button>
+              </div>
+              <div class="drawer__body" data-cart-view>
+                <ul class="drawer__list" data-cart-list></ul>
+                <div class="drawer__empty" data-cart-empty>
+                  <span class="drawer__empty-ic"><i data-icon="cart"></i></span>
+                  <p><b>Su carrito está vacío</b>Toque <em>+</em> en cualquier producto.</p>
+                </div>
+              </div>
+              <div class="drawer__foot" data-cart-foot>
+                <div class="drawer__total"><span>Subtotal</span><b data-subtotal>$0.00</b></div>
+                <button class="btn btn--dark btn--block" type="button" data-pay disabled>Pagar ahora</button>
+              </div>
+              <div class="drawer__done" data-cart-done hidden>
+                <svg class="done-check" viewBox="0 0 80 80" aria-hidden="true">
+                  <circle cx="40" cy="40" r="34" />
+                  <path d="M25 41 l10 10 l20 -22" />
+                </svg>
+                <h4>¡Pedido listo!</h4>
+                <p>Así de fácil se compra en Tienda la 635. En la tienda real, aquí elige su dirección y su forma de pago.</p>
+                <a class="btn btn--dark btn--block" href="https://cartify-tienda-la635.vercel.app/" target="_blank" rel="noopener" data-store-link>
+                  Ir a la tienda real <i data-icon="arrow-up-right"></i>
+                </a>
+                <button class="btn btn--quiet btn--block" type="button" data-reset-cart>Seguir probando</button>
+              </div>
+            </aside>
+
+            <div class="toast" role="status" aria-live="polite" data-toast></div>
+          </div>
+          <p class="demo__note">Demostración con productos y precios de referencia de la tienda.</p>
+        </div>
+      </section>
+
+      <!-- ============ 02 ASISTENTE DE VOZ ============ -->
+      <section class="section section--black" id="asistente" data-theme="dark">
+        <div class="voice-bg" aria-hidden="true"></div>
+        <div class="container voice" data-voice>
+          <div class="voice__copy">
+            <p class="kicker"><span>02</span> Asistente de voz</p>
+            <h2 class="title" data-split>Compre hablando. <em>Literal.</em></h2>
+            <p class="lead" data-fade>
+              Toque el micrófono y dígale lo que necesita. El asistente entiende, busca los productos y los pone en su
+              carrito. En la web, en la app y en el kiosco de la tienda.
+            </p>
+
+            <div class="voice__try" data-fade>
+              <p class="voice__try-label">Pruebe con una frase:</p>
+              <div class="voice__chips">
+                <button class="vchip" type="button" data-phrase="quiero una manzana y dos coca colas"><i data-icon="quote"></i> quiero una manzana y dos coca colas</button>
+                <button class="vchip" type="button" data-phrase="agrega tres takis y unos cheetos"><i data-icon="quote"></i> agrega tres takis y unos cheetos</button>
+                <button class="vchip" type="button" data-phrase="dame dos sprites, una sandía y unas uvas"><i data-icon="quote"></i> dame dos sprites, una sandía y unas uvas</button>
+              </div>
+              <p class="voice__hint" data-voice-hint></p>
+            </div>
+          </div>
+
+          <div class="voice__stage" data-reveal>
+            <div class="orb" data-orb>
+              <span class="orb__ring"></span><span class="orb__ring"></span><span class="orb__ring"></span>
+              <button class="orb__btn" type="button" aria-label="Hablar con el asistente" data-mic><i data-icon="mic"></i></button>
+            </div>
+            <div class="wave" aria-hidden="true" data-wave></div>
+            <p class="voice__status" aria-live="polite" data-voice-status>Toque el micrófono y hable.</p>
+
+            <div class="voice__chat">
+              <div class="bubble bubble--user" data-bubble-user hidden></div>
+              <div class="bubble bubble--bot" data-bubble-bot hidden></div>
+            </div>
+
+            <div class="vcart">
+              <div class="vcart__head">
+                <span><i data-icon="cart"></i> Su carrito</span>
+                <b data-vcart-total>$0.00</b>
+              </div>
+              <ul class="vcart__list" data-vcart-list>
+                <li class="vcart__empty">Todavía no hay nada. Háblele al asistente.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 03 BENEFICIOS ============ -->
+      <section class="section section--paper" id="beneficios">
+        <div class="container">
+          <header class="section__head section__head--split">
+            <div>
+              <p class="kicker"><span>03</span> Beneficios</p>
+              <h2 class="title" data-split>Cuentas con beneficios <em>reales.</em></h2>
+            </div>
+            <p class="lead" data-fade>
+              Desde que pide hasta que le tocan la puerta, cada paso está pensado para usted. Pase el cursor por las
+              tarjetas: todo se mueve.
+            </p>
+          </header>
+
+          <div class="bento">
+            <!-- Mapa -->
+            <article class="card card--map span-2x2" data-spot data-reveal>
+              <div class="card__txt">
+                <span class="card__icon card__icon--dark"><i data-icon="pin"></i></span>
+                <h3>Siga su pedido en el mapa</h3>
+                <p>Vea al repartidor acercarse en tiempo real, desde que sale de la tienda hasta su puerta.</p>
+              </div>
+              <div class="map" data-map>
+                <svg viewBox="0 0 400 260" class="map__svg" aria-hidden="true">
+                  <rect x="0" y="0" width="400" height="260" rx="18" fill="#03283a" />
+                  <g fill="rgba(255,255,255,0.035)">
+                    <rect x="84" y="64" width="72" height="52" rx="6" />
+                    <rect x="184" y="64" width="72" height="52" rx="6" />
+                    <rect x="284" y="64" width="52" height="52" rx="6" />
+                    <rect x="84" y="144" width="72" height="52" rx="6" />
+                    <rect x="284" y="144" width="52" height="52" rx="6" />
+                    <rect x="84" y="224" width="72" height="30" rx="6" />
+                    <rect x="184" y="224" width="72" height="30" rx="6" />
+                    <rect x="8" y="64" width="48" height="52" rx="6" />
+                    <rect x="8" y="144" width="48" height="52" rx="6" />
+                  </g>
+                  <rect x="184" y="144" width="72" height="52" rx="6" fill="rgba(34,197,94,0.14)" />
+                  <g stroke="rgba(255,255,255,0.07)" stroke-width="14" stroke-linecap="round" fill="none">
+                    <path d="M0 50 H400" /><path d="M0 130 H400" /><path d="M0 210 H400" />
+                    <path d="M70 0 V260" /><path d="M170 0 V260" /><path d="M270 0 V260" /><path d="M350 0 V260" />
+                  </g>
+                  <path class="map__route-bg" d="M70 214 L70 142 Q70 130 82 130 L158 130 Q170 130 170 118 L170 62 Q170 50 182 50 L350 50" />
+                  <path class="map__route" id="map-route" d="M70 214 L70 142 Q70 130 82 130 L158 130 Q170 130 170 118 L170 62 Q170 50 182 50 L350 50" />
+                  <g transform="translate(70 214)">
+                    <circle r="13" fill="#003049" stroke="#6fb3d9" stroke-width="2" />
+                    <path d="M-5 -2 h10 v7 h-10z M-6 -2 l2 -4 h8 l2 4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" />
+                  </g>
+                  <g transform="translate(350 50)">
+                    <circle r="16" fill="rgba(255,255,255,0.12)" class="map__home-pulse" />
+                    <circle r="11" fill="#fff" />
+                    <path d="M-5 1 L0 -4 L5 1 V5 H-5Z" fill="#003049" />
+                  </g>
+                  <g id="map-rider">
+                    <circle r="14" fill="rgba(0,154,235,0.25)" />
+                    <circle r="8" fill="#fff" />
+                    <circle r="4.5" fill="#009aeb" />
+                  </g>
+                </svg>
+                <div class="map__status"><span class="dot dot--live"></span> <span data-map-status>Preparando su pedido</span></div>
+                <div class="map__rider">
+                  <span class="avatar">C</span>
+                  <span class="map__rider-txt"><b>Carlos R.</b><small>Moto · Placa SS-042</small></span>
+                  <span class="map__eta"><b data-map-eta>12</b><small>min</small></span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Código de entrega -->
+            <article class="card card--code" data-spot data-reveal>
+              <span class="card__icon"><i data-icon="shield"></i></span>
+              <div class="code" data-code aria-label="Código de entrega de ejemplo"></div>
+              <div>
+                <h3>Código de entrega</h3>
+                <p>Se lo dicta al repartidor y su pedido llega a las manos correctas.</p>
+              </div>
+              <button class="link-btn" type="button" data-code-roll><i data-icon="rotate"></i> Otro código</button>
+            </article>
+
+            <!-- Puntos -->
+            <article class="card card--points" data-spot data-reveal>
+              <div class="points">
+                <svg viewBox="0 0 120 120" class="points__ring" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="pts-grad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#003049" />
+                      <stop offset="1" stop-color="#009aeb" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="60" cy="60" r="50" class="points__track" />
+                  <circle cx="60" cy="60" r="50" class="points__bar" data-points-bar />
+                </svg>
+                <div class="points__num"><b data-points>0</b><small>puntos</small></div>
+              </div>
+              <div>
+                <h3>Puntos de fidelidad</h3>
+                <p>Junte puntos con cada compra y úselos en las siguientes.</p>
+              </div>
+            </article>
+
+            <!-- Tarjeta de regalo -->
+            <article class="card card--gift span-2" data-spot data-reveal>
+              <div class="card__txt">
+                <span class="card__icon"><i data-icon="gift"></i></span>
+                <h3>Tarjetas de regalo</h3>
+                <p>Regale saldo para la tienda. Quien la recibe la canjea con su código y listo.</p>
+              </div>
+              <div class="gift-stage" data-gift-area>
+                <div class="gift" data-gift>
+                  <div class="gift__shine"></div>
+                  <div class="gift__top">
+                    <span class="gift__brand"><span data-logo></span><span><b>Tienda</b><b>la 635</b></span></span>
+                    <span class="gift__label">Tarjeta de regalo</span>
+                  </div>
+                  <div class="gift__chip"></div>
+                  <div class="gift__bottom">
+                    <b class="gift__amount">$25.00</b>
+                    <span class="gift__code">635-7Q4K-2M9P</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Edad -->
+            <article class="card card--age" data-spot data-reveal data-age>
+              <div class="age">
+                <div class="age__lock" data-age-lock><i data-icon="lock"></i></div>
+                <div class="age__field">
+                  <small>Número de DUI</small>
+                  <div class="age__input"><span data-age-text></span><i class="caret"></i></div>
+                </div>
+                <div class="age__ok" data-age-ok><i data-icon="check"></i> Verificado</div>
+              </div>
+              <div>
+                <h3>Verificación de edad</h3>
+                <p>Los productos para mayores de 18 piden el DUI antes de mostrarse.</p>
+              </div>
+            </article>
+
+            <!-- Kiosco QR -->
+            <article class="card card--kiosk" data-spot data-reveal>
+              <div class="qr">
+                <div class="qr__code" data-qr></div>
+                <span class="qr__scan"></span>
+              </div>
+              <div>
+                <h3>Kiosco con QR</h3>
+                <p>En la tienda, escanee el código y la compra queda en su cuenta. Este lo lleva a la tienda en línea.</p>
+              </div>
+            </article>
+
+            <!-- Temporada -->
+            <article class="card card--season span-2" data-spot data-reveal data-season>
+              <div class="card__txt">
+                <span class="card__icon"><i data-icon="sparkles"></i></span>
+                <h3>Saludo de temporada</h3>
+                <p>El dueño cambia el saludo de la tienda según la fecha, sin tocar una línea de código.</p>
+                <div class="season__btns" role="group" aria-label="Elegir temporada" data-season-btns></div>
+              </div>
+              <div class="season__preview">
+                <div class="season__win">
+                  <div class="season__bar"><span></span><span></span><span></span></div>
+                  <div class="season__head"><b>Tienda</b><b>la 635</b><i></i></div>
+                  <div class="season__ribbon" data-season-ribbon><span data-season-text></span></div>
+                  <div class="season__rows"><i></i><i></i><i></i></div>
+                  <div class="season__confetti" data-season-confetti aria-hidden="true"></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 04 IMPRESIONES ============ -->
+      <section class="section section--mist" id="impresiones">
+        <div class="container print" data-print>
+          <div class="print__controls">
+            <p class="kicker"><span>04</span> Impresiones</p>
+            <h2 class="title" data-split>También imprimimos. <em>Sin hacer fila.</em></h2>
+            <p class="lead" data-fade>
+              Suba su archivo desde la casa, elija formato y papel, y páselo a recoger listo. Fotos para DUI y
+              pasaporte incluidas. Pruebe con una foto suya:
+            </p>
+
+            <div class="pstep" data-fade>
+              <p class="pstep__title"><span>1</span> Formato</p>
+              <div class="chips" role="radiogroup" aria-label="Formato" data-formats></div>
+            </div>
+
+            <div class="pstep" data-fade>
+              <p class="pstep__title"><span>2</span> Su imagen</p>
+              <label class="drop" data-drop>
+                <input type="file" accept="image/*" data-file hidden />
+                <span class="drop__ic" data-drop-thumb><i data-icon="upload"></i></span>
+                <span class="drop__txt">
+                  <b data-drop-title>Arrastre una foto o haga clic para elegirla</b>
+                  <small>Su imagen no sale de este navegador.</small>
+                </span>
+              </label>
+              <div class="copies" data-copies hidden>
+                <span>Copias en la hoja</span>
+                <div class="stepper">
+                  <button type="button" aria-label="Quitar una copia" data-copies-dec><i data-icon="minus"></i></button>
+                  <b data-copies-n>2</b>
+                  <button type="button" aria-label="Agregar una copia" data-copies-inc><i data-icon="plus"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="pstep" data-fade>
+              <p class="pstep__title"><span>3</span> Opciones</p>
+              <div class="toggles">
+                <button class="switch" type="button" role="switch" aria-checked="false" data-duplex><span class="switch__knob"></span> Doble cara</button>
+                <button class="switch" type="button" role="switch" aria-checked="true" data-color><span class="switch__knob"></span> A color</button>
+              </div>
+              <div class="chips chips--sm" role="radiogroup" aria-label="Tipo de papel" data-papers></div>
+            </div>
+          </div>
+
+          <div class="print__preview" data-reveal>
+            <div class="sheet-stage" data-sheet-stage>
+              <div class="sheet" data-sheet data-paper="normal">
+                <div class="sheet__face sheet__front" data-front></div>
+                <div class="sheet__face sheet__back" data-back></div>
+              </div>
+              <button class="flip-btn" type="button" data-flip hidden><i data-icon="rotate"></i> Girar hoja</button>
+            </div>
+            <p class="sheet-meta" data-sheet-meta></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 05 APP MÓVIL ============ -->
+      <section class="section section--navy appsec" id="app" data-theme="dark" data-app>
+        <div class="container appsec__inner">
+          <div class="appsec__copy">
+            <p class="kicker"><span>05</span> App móvil</p>
+            <h2 class="title" data-split>Y en su bolsillo, <em>también.</em></h2>
+            <ol class="steps" data-steps>
+              <li class="is-active" data-step="0">
+                <span class="steps__bar"><i></i></span>
+                <button type="button"><h3>Pasillos</h3><p>Recorra la tienda por categorías, con las promos del día al frente.</p></button>
+              </li>
+              <li data-step="1">
+                <span class="steps__bar"><i></i></span>
+                <button type="button"><h3>Asistente</h3><p>El mismo asistente de voz, ahora en su celular.</p></button>
+              </li>
+              <li data-step="2">
+                <span class="steps__bar"><i></i></span>
+                <button type="button"><h3>Seguimiento</h3><p>Vea al repartidor acercarse y tenga a mano su código de entrega.</p></button>
+              </li>
+            </ol>
+          </div>
+
+          <div class="appsec__phone" aria-hidden="true">
+            <div class="phone-glow"></div>
+            <div class="phone" data-phone>
+              <div class="phone__island"></div>
+              <div class="phone__screen">
+                <!-- Pasillos -->
+                <div class="screen screen--aisles is-active" data-screen="0">
+                  <div class="sbar"><b>9:41</b><span class="sbar__icons"><i></i><i></i><i></i></span></div>
+                  <div class="s-head">
+                    <div class="mini-word"><b>Tienda</b><b>la 635</b></div>
+                    <span class="s-cart"><i data-icon="cart"></i></span>
+                  </div>
+                  <div class="s-search"><i data-icon="search"></i> Buscar productos…</div>
+                  <div class="s-promo">
+                    <div><span class="s-badge">NUEVO</span><b>Pura fruta jugosa, recién llegada</b></div>
+                    <img src="/img/sanda.png" alt="" />
+                  </div>
+                  <p class="s-title">Categorías</p>
+                  <div class="s-cats">
+                    <span><i><img src="/img/manzana.webp" alt="" /></i>Frutas</span>
+                    <span><i><img src="/img/cheetos-crunchy.png" alt="" /></i>Snacks</span>
+                    <span><i><img src="/img/coca-cola.png" alt="" /></i>Bebidas</span>
+                    <span><i><img src="/img/queso-parmesano.webp" alt="" /></i>Lácteos</span>
+                  </div>
+                  <p class="s-title">Más vendidos</p>
+                  <div class="s-grid">
+                    <div class="s-card"><i><img src="/img/uvas-verdes.webp" alt="" /></i><p>Uvas verdes</p><div><b>$5.20</b><em>+</em></div></div>
+                    <div class="s-card"><i><img src="/img/pera.png" alt="" /></i><p>Pera</p><div><b>$1.60</b><em>+</em></div></div>
+                  </div>
+                  <div class="s-tabs"><span class="is-on"><i data-icon="home"></i></span><span><i data-icon="grid"></i></span><span class="s-tabs__mic"><i data-icon="mic"></i></span><span><i data-icon="receipt"></i></span><span><i data-icon="user"></i></span></div>
+                </div>
+
+                <!-- Asistente -->
+                <div class="screen screen--voice" data-screen="1">
+                  <div class="sbar sbar--light"><b>9:41</b><span class="sbar__icons"><i></i><i></i><i></i></span></div>
+                  <div class="sv-head"><b>Asistente de voz</b><small>Toca el micrófono y habla.</small></div>
+                  <div class="sv-orb"><span></span><span></span><em><i data-icon="mic"></i></em></div>
+                  <div class="sv-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  <div class="sv-said" data-sv-said>“quiero unas uvas verdes”</div>
+                  <div class="sv-reply">
+                    <i><img src="/img/uvas-verdes.webp" alt="" /></i>
+                    <span><b>Uvas verdes</b><small>$5.20 · Agregado</small></span>
+                    <em><i data-icon="check"></i></em>
+                  </div>
+                  <div class="sv-cartpill"><span><i data-icon="cart"></i> Ver carrito (1)</span><b>$5.20</b></div>
+                </div>
+
+                <!-- Seguimiento -->
+                <div class="screen screen--track" data-screen="2">
+                  <div class="sbar"><b>9:41</b><span class="sbar__icons"><i></i><i></i><i></i></span></div>
+                  <div class="st-head"><b>Tu pedido</b><span class="st-pill"><span class="dot dot--live"></span> En camino</span></div>
+                  <div class="st-map">
+                    <svg viewBox="0 0 280 230" aria-hidden="true">
+                      <rect width="280" height="230" fill="#e8eef2" />
+                      <g stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round">
+                        <path d="M0 40 H280" /><path d="M0 116 H280" /><path d="M0 196 H280" />
+                        <path d="M40 0 V230" /><path d="M150 0 V230" /><path d="M240 0 V230" />
+                      </g>
+                      <rect x="162" y="128" width="66" height="56" rx="6" fill="#d3ead9" />
+                      <path d="M40 196 L40 128 Q40 116 52 116 L138 116 Q150 116 150 104 L150 52 Q150 40 162 40 L240 40" fill="none" stroke="#003049" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 9" opacity="0.35" />
+                      <path id="phone-route" d="M40 196 L40 128 Q40 116 52 116 L138 116 Q150 116 150 104 L150 52 Q150 40 162 40 L240 40" fill="none" stroke="none" />
+                      <circle cx="40" cy="196" r="7" fill="#003049" />
+                      <g transform="translate(240 40)"><circle r="12" fill="rgba(0,48,73,.15)" /><circle r="7" fill="#003049" /><circle r="3" fill="#fff" /></g>
+                      <g id="phone-rider"><circle r="11" fill="rgba(0,154,235,.25)" /><circle r="6.5" fill="#009aeb" stroke="#fff" stroke-width="2.5" /></g>
+                    </svg>
+                  </div>
+                  <div class="st-card">
+                    <div class="st-rider">
+                      <span class="avatar">C</span>
+                      <span><b>Carlos R.</b><small>Moto · SS-042</small></span>
+                      <span class="st-eta"><b>12</b><small>min</small></span>
+                    </div>
+                    <div class="st-steps">
+                      <span class="is-done">Confirmado</span><span class="is-done">Preparado</span><span class="is-now">En camino</span><span>Entregado</span>
+                    </div>
+                    <div class="st-code"><small>Código de entrega</small><span><i>4</i><i>8</i><i>2</i><i>7</i></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 06 PANEL ============ -->
+      <section class="section section--paper" id="panel">
+        <div class="container">
+          <header class="section__head section__head--split">
+            <div>
+              <p class="kicker"><span>06</span> Panel administrativo</p>
+              <h2 class="title" data-split>Y por dentro, <em>control total.</em></h2>
+            </div>
+            <p class="lead" data-fade>
+              Inventario, pedidos, proveedores, empleados y reportes en un solo panel. El dueño ve todo; su equipo, solo
+              lo que necesita.
+            </p>
+          </header>
+
+          <div class="admin" data-admin data-reveal>
+            <aside class="admin__side">
+              <div class="admin__brand"><span data-logo></span><span class="brand__word"><b>Tienda</b><b>la 635</b></span></div>
+              <div class="admin__tabs" role="tablist" aria-label="Vistas del panel">
+                <button role="tab" type="button" class="is-active" aria-selected="true" data-tab="dashboard"><i data-icon="dashboard"></i> Dashboard</button>
+                <button role="tab" type="button" aria-selected="false" tabindex="-1" data-tab="inventario"><i data-icon="box"></i> Inventario</button>
+                <button role="tab" type="button" aria-selected="false" tabindex="-1" data-tab="reportes"><i data-icon="file"></i> Reportes PDF</button>
+                <button role="tab" type="button" aria-selected="false" tabindex="-1" data-tab="roles"><i data-icon="users"></i> Roles</button>
+              </div>
+              <div class="admin__me"><span class="avatar avatar--light">A</span><span><b>Administrador</b><small>Sesión con 2FA</small></span></div>
+            </aside>
+
+            <div class="admin__main">
+              <!-- Dashboard -->
+              <div class="apanel is-active" role="tabpanel" data-panel="dashboard">
+                <div class="apanel__head"><div><h3>Resumen de hoy</h3><p>Datos de ejemplo</p></div><span class="live"><span class="dot dot--live"></span> En vivo</span></div>
+                <div class="kpis">
+                  <div class="kpi"><small>Ventas de hoy</small><b data-count="1284.5" data-prefix="$" data-decimals="2">$0</b><span class="kpi__trend">+12% vs. ayer</span></div>
+                  <div class="kpi"><small>Pedidos</small><b data-count="38">0</b><span class="kpi__trend kpi__trend--muted">6 en camino</span></div>
+                  <div class="kpi"><small>Stock bajo</small><b data-count="5">0</b><span class="kpi__trend kpi__trend--warn">productos por surtir</span></div>
+                </div>
+                <div class="chart">
+                  <div class="chart__head"><b>Ventas de la semana</b><small>Pase el cursor por las barras</small></div>
+                  <div class="chart__bars" data-bars></div>
+                </div>
+              </div>
+
+              <!-- Inventario -->
+              <div class="apanel" role="tabpanel" data-panel="inventario" hidden>
+                <div class="apanel__head">
+                  <div><h3>Inventario en cascada</h3><p>Cada nivel filtra al siguiente.</p></div>
+                  <div class="seg" role="group" aria-label="Módulo" data-module>
+                    <button type="button" class="is-active" data-mod="tienda">Tienda</button>
+                    <button type="button" data-mod="impresiones">Impresiones</button>
+                  </div>
+                </div>
+                <div class="cascade" data-cascade></div>
+              </div>
+
+              <!-- Reportes -->
+              <div class="apanel" role="tabpanel" data-panel="reportes" hidden>
+                <div class="apanel__head">
+                  <div><h3>Reportes en PDF</h3><p>El dashboard, listo para imprimir o enviar.</p></div>
+                  <button class="btn btn--dark btn--sm" type="button" data-gen-pdf><i data-icon="download"></i> Generar PDF</button>
+                </div>
+                <div class="pdf-stage">
+                  <div class="pdf-slot"></div>
+                  <div class="pdf" data-pdf>
+                    <div class="pdf__head"><span data-logo></span><div><b>Reporte de ventas</b><small>Tienda la 635 · Semana actual</small></div></div>
+                    <table class="pdf__table">
+                      <thead><tr><th>Producto</th><th>Cant.</th><th>Total</th></tr></thead>
+                      <tbody>
+                        <tr><td>Coca-Cola</td><td>64</td><td>$80.00</td></tr>
+                        <tr><td>Takis Originales</td><td>52</td><td>$52.00</td></tr>
+                        <tr><td>Manzana</td><td>18</td><td>$93.60</td></tr>
+                        <tr><td>Uvas verdes</td><td>11</td><td>$57.20</td></tr>
+                        <tr><td>Impresión carta</td><td>240</td><td>$12.00</td></tr>
+                      </tbody>
+                    </table>
+                    <div class="pdf__total"><span>Total</span><b>$294.80</b></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Roles -->
+              <div class="apanel" role="tabpanel" data-panel="roles" hidden>
+                <div class="apanel__head">
+                  <div><h3>Cada quien con su rol</h3><p>Lo que ve cada cuenta del personal.</p></div>
+                  <div class="seg" role="group" aria-label="Rol" data-role>
+                    <button type="button" class="is-active" data-r="admin">Admin</button>
+                    <button type="button" data-r="empleado">Empleado</button>
+                  </div>
+                </div>
+                <div class="roles">
+                  <ul class="perms" data-perms></ul>
+                  <div class="twofa">
+                    <span class="card__icon"><i data-icon="mail"></i></span>
+                    <b>Verificación en dos pasos</b>
+                    <small>Le enviamos un código a su correo.</small>
+                    <div class="twofa__boxes" data-2fa><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    <span class="twofa__ok" data-2fa-ok><i data-icon="check"></i> Sesión verificada</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ul class="features">
+            <li data-fade><i data-icon="box"></i> Inventario en cascada</li>
+            <li data-fade><i data-icon="truck"></i> Proveedores y marcas</li>
+            <li data-fade><i data-icon="file"></i> Reportes en PDF</li>
+            <li data-fade><i data-icon="users"></i> Roles Admin y Empleado</li>
+            <li data-fade><i data-icon="barcode"></i> Códigos de barras automáticos</li>
+            <li data-fade><i data-icon="cloud"></i> Imágenes en la nube</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ 07 TRAILER ============ -->
+      <section class="section section--black trailer" id="trailer" data-theme="dark">
+        <div class="container">
+          <header class="section__head section__head--center">
+            <p class="kicker"><span>07</span> Trailer</p>
+            <h2 class="title" data-split>Véalo en <em>un minuto.</em></h2>
+          </header>
+        </div>
+        <div class="trailer__wrap">
+          <div class="trailer__frame" data-trailer-frame>
+            <video muted loop playsinline preload="none" poster="/video/poster2.jpg" data-trailer-bg>
+              <source src="/video/trailer.mp4" type="video/mp4" />
+            </video>
+            <button class="trailer__play" type="button" data-open-trailer aria-label="Ver el trailer en grande">
+              <span class="trailer__play-ic"><i data-icon="play"></i></span>
+              <span>Ver en grande</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CIERRE ============ -->
+      <section class="cta" id="contacto" data-theme="dark">
+        <div class="cta__bg" aria-hidden="true"><div class="glow glow--c"></div></div>
+        <div class="container cta__inner">
+          <p class="eyebrow"><span class="dot"></span> Listo cuando usted lo esté</p>
+          <h2 class="cta__word" aria-label="Tienda la 635">
+            <span class="mask"><span>Tienda</span></span>
+            <span class="mask"><span>la 635</span></span>
+          </h2>
+          <div class="cta__line"></div>
+          <p class="cta__tag">El súper de la esquina, <em>a un click.</em></p>
+          <div class="cta__actions">
+            <a class="btn btn--light btn--lg magnetic" href="https://cartify-tienda-la635.vercel.app/" target="_blank" rel="noopener" data-store-link>
+              Ir a la tienda <i data-icon="arrow-up-right"></i>
+            </a>
+            <button class="url-pill" type="button" data-copy>
+              <span data-copy-label>cartify-tienda-la635.vercel.app</span> <i data-icon="copy"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <a class="brand" href="#inicio" aria-label="Volver al inicio">
+          <span data-logo></span>
+          <span class="brand__word"><b>Tienda</b><b>la 635</b></span>
+        </a>
+        <nav class="footer__links" aria-label="Pie de página">
+          <a href="#tienda">Tienda</a>
+          <a href="#asistente">Asistente</a>
+          <a href="#impresiones">Impresiones</a>
+          <a href="#app">App</a>
+          <a href="#panel">Panel</a>
+        </nav>
+        <p class="footer__meta">Hecho en El Salvador · Plataforma Cartify · © 2026 Tienda la 635</p>
+      </div>
+    </footer>
+
+    <!-- ============ MODAL DEL TRAILER ============ -->
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Trailer de Tienda la 635" data-modal hidden>
+      <div class="modal__backdrop" data-close-modal></div>
+      <div class="modal__box">
+        <button class="modal__close" type="button" aria-label="Cerrar trailer" data-close-modal><i data-icon="x"></i></button>
+        <video controls playsinline preload="none" poster="/video/poster.jpg" data-modal-video>
+          <source src="/video/trailer.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </body>
+</html>
