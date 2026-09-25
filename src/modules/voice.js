@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { PRODUCTS, byId, money, normalize } from './data.js';
 import { reduceMotion } from '../config.js';
+import { ponerPose } from './tiqui.js';
 
 const NUMBERS = {
   un: 1, uno: 1, una: 1, unos: 1, unas: 1, par: 2,
@@ -38,8 +39,16 @@ export function parseOrder(text) {
   return [...found.entries()].map(([id, qty]) => ({ id, qty }));
 }
 
+const EN_LETRAS = ['', 'un', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez'];
+
+// "una manzana y dos Coca-Colas": como lo diría Tiqui en la tienda.
 const listText = (items) => {
-  const parts = items.map(({ id, qty }) => `${qty} ${byId(id).name}`);
+  const parts = items.map(({ id, qty }) => {
+    const p = byId(id);
+    const [uno, varios] = p.dicho || [p.name, p.name];
+    const numero = qty === 1 ? (p.f ? 'una' : 'un') : EN_LETRAS[qty] || String(qty);
+    return `${numero} ${qty === 1 ? uno : varios}`;
+  });
   return parts.length > 1 ? `${parts.slice(0, -1).join(', ')} y ${parts.at(-1)}` : parts[0];
 };
 
@@ -57,6 +66,13 @@ export function initVoice(root) {
   const totalEl = $('[data-vcart-total]');
   const hint = $('[data-voice-hint]');
   const chips = [...root.querySelectorAll('[data-phrase]')];
+  // Tiqui arriba del micrófono: su cara dice en qué va (escucha, piensa, lista).
+  const tiqui = root.querySelector('[data-voz-tiqui]');
+  let volverANormal;
+  const cara = (pose, extra = '') => {
+    clearTimeout(volverANormal);
+    ponerPose(tiqui, pose, extra);
+  };
 
   const cart = new Map();
   let busy = false;
@@ -88,6 +104,10 @@ export function initVoice(root) {
   };
 
   const setMode = (mode) => {
+    if (mode === 'listening') cara('escucha', 'ondas');
+    if (mode === 'thinking') cara('piensa');
+    // Si se cortó sin respuesta (sin micrófono, no se oyó), vuelve a su cara de siempre.
+    if (mode === 'idle' && ['escucha', 'piensa'].includes(tiqui?.dataset.pose)) cara('normal');
     root.classList.toggle('is-listening', mode === 'listening');
     root.classList.toggle('is-thinking', mode === 'thinking');
     busy = mode !== 'idle';
@@ -102,17 +122,23 @@ export function initVoice(root) {
   /* ---------- Respuesta ---------- */
   async function answer(text, { speak = false } = {}) {
     setMode('thinking');
-    status.textContent = 'Buscando productos…';
+    status.textContent = 'Tiqui está buscando…';
     show(botB, '<span class="typing"><i></i><i></i><i></i></span>');
     if (!reduceMotion) gsap.fromTo(botB, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 });
     await sleep(950);
 
     const items = parseOrder(text);
     let reply;
+    /*
+     * Habla Tiqui: en primera persona, en femenino y tuteando, como en la
+     * tienda. El "¿algo más?" solo cuando de verdad tocó el carrito.
+     */
     if (!items.length) {
-      reply = 'No encontré esos productos en la demostración. Pruebe con frutas, snacks o bebidas.';
+      reply = 'Uy, eso no lo tengo en esta demostración. Prueba con frutas, snacks o bebidas.';
+      cara('apenado');
     } else {
-      reply = `Listo, agregué ${listText(items)} a su carrito.`;
+      reply = `¡Listo! Te agregué ${listText(items)}. ¿Te llevo algo más?`;
+      cara('feliz');
       items.forEach(({ id, qty }) => cart.set(id, (cart.get(id) || 0) + qty));
       renderCart(items.map((i) => i.id));
     }
@@ -121,6 +147,7 @@ export function initVoice(root) {
 
     status.textContent = 'Toque el micrófono y hable.';
     setMode('idle');
+    volverANormal = setTimeout(() => ponerPose(tiqui, 'normal', ''), 3500);
   }
 
   function renderCart(changed = []) {

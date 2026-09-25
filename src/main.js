@@ -10,7 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { Flip } from 'gsap/Flip';
 
-import { STORE_URL, STORE_HOST, reduceMotion, finePointer } from './config.js';
+import { STORE_URL, STORE_HOST, API_URL, TIQUI_VIDEO, LEGALES, reduceMotion, finePointer } from './config.js';
 import { hydrateIcons, LOGO_MARK, icon } from './modules/icons.js';
 import { initScroll, scrollTo, stopScroll, startScroll } from './modules/scroll.js';
 import { initStore } from './modules/store.js';
@@ -19,12 +19,15 @@ import { initBento } from './modules/bento.js';
 import { initPrint } from './modules/print.js';
 import { initApp } from './modules/app.js';
 import { initAdmin } from './modules/admin.js';
+import { montarTiqui } from './modules/tiqui.js';
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, Flip);
 
 /* ---------- Marca e íconos ---------- */
 document.querySelectorAll('[data-logo]').forEach((el) => (el.innerHTML = LOGO_MARK));
 document.querySelectorAll('[data-store-link]').forEach((a) => (a.href = STORE_URL));
+montarTiqui();
+pintarFantasmas();
 hydrateIcons();
 
 initScroll();
@@ -50,6 +53,8 @@ initHeroParallax();
 initTrailer();
 initCta();
 initCopy();
+initLegales();
+cargarNegocio();
 
 const heroTl = buildHeroIntro();
 runLoader(heroTl);
@@ -386,8 +391,20 @@ function initTrailer() {
     });
   }
 
-  const open = () => {
+  /*
+   * El mismo modal sirve para el trailer y para la presentación de Tiqui: solo
+   * cambia el video que carga y el nombre que anuncia el lector de pantalla.
+   */
+  const TRAILER = { src: '/video/trailer.mp4', poster: '/video/poster.jpg', nombre: 'Trailer de Tienda la 635' };
+  const open = (video = TRAILER) => {
     lastFocus = document.activeElement;
+    if (modalVideo.dataset.src !== video.src) {
+      modalVideo.dataset.src = video.src;
+      modalVideo.src = video.src;
+      if (video.poster) modalVideo.poster = video.poster;
+      else modalVideo.removeAttribute('poster');
+    }
+    modal.setAttribute('aria-label', video.nombre);
     modal.hidden = false;
     stopScroll();
     bgVideo.pause();
@@ -397,6 +414,17 @@ function initTrailer() {
     modalVideo.play().catch(() => {});
     modal.querySelector('.modal__close').focus();
   };
+
+  /*
+   * La presentación de Tiqui. Mientras no exista (config.js → TIQUI_VIDEO
+   * vacío) la sección dice "Muy pronto" y no hay botón que lleve a nada.
+   */
+  const botonTiqui = document.querySelector('[data-play-tiqui]');
+  if (botonTiqui && TIQUI_VIDEO) {
+    botonTiqui.hidden = false;
+    document.querySelector('[data-tiqui-video-estado]').textContent = 'Conózcala en un minuto.';
+    botonTiqui.addEventListener('click', () => open({ src: TIQUI_VIDEO, nombre: 'Presentación de Tiqui' }));
+  }
   const close = () => {
     modalVideo.pause();
     gsap.to('.modal__box', { scale: 0.94, opacity: 0, duration: 0.3, ease: 'power2.in' });
@@ -411,7 +439,7 @@ function initTrailer() {
     });
   };
 
-  document.querySelectorAll('[data-open-trailer]').forEach((b) => b.addEventListener('click', open));
+  document.querySelectorAll('[data-open-trailer]').forEach((b) => b.addEventListener('click', () => open()));
   modal.querySelectorAll('[data-close-modal]').forEach((b) => b.addEventListener('click', close));
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !modal.hidden) close();
@@ -457,4 +485,70 @@ function initCopy() {
       btn.insertAdjacentHTML('beforeend', icon('copy'));
     }, 2200);
   });
+}
+
+/*
+ * Las etiquetas "fantasma" del fondo de la sección de Tiqui: solo el
+ * contorno, casi invisibles. Es el mismo fondo de su video y de la app.
+ */
+function pintarFantasmas() {
+  const svg = document.querySelector('[data-fantasmas]');
+  if (!svg) return;
+  const FORMA =
+    'M183,127 Q200,110 217,127 L261.6,171.6 Q280,190 280,216 C284,258 284,302 280,344 Q280,380 244,380 C215,383 185,383 156,380 Q120,380 120,344 C116,302 116,258 120,216 Q120,190 138.4,171.6 Z M212,160 A12,12 0 1 0 188,160 A12,12 0 1 0 212,160 Z';
+  // En los bordes, lejos del texto: son fondo, no tienen que cruzarse con nada.
+  const lugares = [
+    [-40, 20, -14, 0.55], [1230, -30, 12, 0.6], [1300, 640, -8, 0.5], [-20, 700, 16, 0.42], [560, -60, -20, 0.3],
+  ];
+  svg.innerHTML = lugares
+    .map(
+      ([x, y, giro, k]) =>
+        `<path d="${FORMA}" fill="none" stroke="#003049" stroke-opacity=".07" stroke-width="${(6 / k).toFixed(1)}" transform="translate(${x} ${y}) rotate(${giro}) scale(${k})"/>`
+    )
+    .join('');
+}
+
+// Los documentos legales viven en la tienda; aquí van los enlaces.
+function initLegales() {
+  const nav = document.querySelector('[data-legales]');
+  if (!nav) return;
+  nav.innerHTML = LEGALES.map(
+    ({ texto, ruta }) => `<a href="${new URL(ruta, STORE_URL)}" target="_blank" rel="noopener">${texto}</a>`
+  ).join('');
+}
+
+/*
+ * Los datos del negocio, los mismos que el dueño llena en el panel
+ * (Personalización → Identidad) y que salen en el pie de la tienda. Si el
+ * servidor no contesta —está dormido, o este dominio no está en su
+ * CORS_ORIGINS—, el pie se queda con los enlaces legales y ya.
+ */
+async function cargarNegocio() {
+  const dl = document.querySelector('[data-negocio]');
+  if (!dl) return;
+  try {
+    const control = new AbortController();
+    const reloj = setTimeout(() => control.abort(), 60000);
+    const res = await fetch(`${API_URL}/storeSettings`, { signal: control.signal });
+    clearTimeout(reloj);
+    if (!res.ok) return;
+    const ajustes = await res.json();
+    const n = ajustes?.negocio || {};
+    const escapar = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const filas = [
+      ['Titular', n.titular],
+      ['NIT', n.nit],
+      ['NRC', n.nrc],
+      ['Dirección', ajustes?.direccion],
+      ['Teléfono', n.telefono],
+      ['Correo', n.correo],
+      ['Horario', n.horario],
+    ].filter(([, v]) => v && String(v).trim());
+    if (!filas.length) return;
+    dl.innerHTML = filas.map(([k, v]) => `<div><dt>${k}</dt><dd>${escapar(v)}</dd></div>`).join('');
+    dl.hidden = false;
+    if (n.titular) document.querySelector('[data-titular]').textContent = n.titular;
+  } catch {
+    // Sin datos del negocio: el pie sigue completo con lo demás.
+  }
 }

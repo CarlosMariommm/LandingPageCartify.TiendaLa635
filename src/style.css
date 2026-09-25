@@ -15,13 +15,15 @@
 
   --tinta: #1c1614;
   --tinta-suave: #6b6560;
-  --tinta-tenue: #9c9691;
+  /* Igual que la tienda: el #9c9691 daba 2,9:1 sobre blanco. */
+  --tinta-tenue: #736d66;
   --papel: #ffffff;
   --papel-gris: #f5f5f5;
   --hueso: #f7f5f2;
   --banda: #e9e7e4;
   --linea: #ece7e1;
-  --ok: #16a34a;
+  /* Verde de "listo". El #16a34a daba 3,3:1 como letra sobre blanco. */
+  --ok: #137a3a;
   --rojo: #e0435b;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -927,7 +929,7 @@ body::after {
   top: 30%;
 }
 .hchip--eta {
-  left: 10%;
+  left: 22%;
   bottom: 2%;
 }
 .hchip--pts {
@@ -2193,7 +2195,8 @@ body::after {
 }
 .map__eta small {
   font-size: 0.68rem;
-  opacity: 0.8;
+  /* Explícito: heredaba el gris de .map__rider small y sobre el navy no se leía. */
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* código de entrega */
@@ -3504,6 +3507,10 @@ body::after {
 .st-eta b {
   font-size: 15px;
 }
+/* Le ganaba el gris de .st-rider small: sobre el navy, blanco. */
+.st-eta small {
+  color: rgba(255, 255, 255, 0.85);
+}
 .st-steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -3522,7 +3529,8 @@ body::after {
   border-color: var(--marca-600);
 }
 .st-steps .is-now {
-  color: var(--acento);
+  /* El azul de acento como letra chica sobre blanco daba 3:1; este, 5,2:1. */
+  color: #0070b8;
   font-weight: 600;
   border-color: var(--acento);
 }
@@ -3719,7 +3727,8 @@ body::after {
   color: var(--marca-400);
 }
 .kpi__trend--warn {
-  color: #d97706;
+  /* Ámbar más hondo: el #d97706 daba 3,2:1 sobre blanco. */
+  color: #b45309;
 }
 .chart {
   margin-top: 12px;
@@ -4380,7 +4389,8 @@ body::after {
 .footer__meta {
   width: 100%;
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.4);
+  /* 0,6 y no 0,4: a este tamaño la letra pide 4,5:1 con el negro. */
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* ==========================================================
@@ -4431,6 +4441,289 @@ body::after {
 .modal__close:hover {
   background: rgba(255, 255, 255, 0.2);
   rotate: 90deg;
+}
+
+/* ==========================================================
+   TIQUI — el dibujo (ver src/modules/tiqui.js)
+   ========================================================== */
+[data-tiqui] {
+  display: inline-block;
+  line-height: 0;
+}
+.tq {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+/* Flota despacio, como colgada de su cordón. */
+.tq__cuerpo {
+  animation: tq-flota 3.2s ease-in-out infinite;
+}
+@keyframes tq-flota {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+/* Parpadea cada tanto: es lo que la hace sentirse viva y no un dibujo. */
+.tq-ojo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tq-parpadeo 4.2s infinite;
+}
+@keyframes tq-parpadeo {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.12); }
+}
+.tq-ondas {
+  animation: tq-ondas 1.1s ease-in-out infinite;
+}
+@keyframes tq-ondas {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+/* ==========================================================
+   01 · CONOZCA A TIQUI
+   El fondo de su video y de la app: claro, con etiquetas fantasma y un
+   brillo azul. Nada va en tarjetas: todo fluye sobre el fondo.
+   ========================================================== */
+.tiquisec {
+  background: var(--marca-50);
+  color: var(--marca-600);
+  overflow: hidden;
+}
+.tiquisec__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+/* Las etiquetas fantasma solo en la parte de arriba, alrededor de Tiqui. */
+.tiquisec__bg svg {
+  width: 100%;
+  height: min(100%, 980px);
+}
+.tiquisec__brillo {
+  position: absolute;
+  width: min(900px, 90vw);
+  aspect-ratio: 1;
+  left: -10%;
+  top: -12%;
+  background: radial-gradient(closest-side, rgba(0, 154, 235, 0.16), transparent);
+}
+.tiquisec .container {
+  position: relative;
+}
+.tiquisec__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 6vw, 90px);
+  align-items: center;
+}
+.tiquisec__escena {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tiquisec__ella {
+  width: min(340px, 72%);
+  filter: drop-shadow(0 30px 40px rgba(0, 48, 73, 0.18));
+}
+.tiquisec .title {
+  color: var(--marca-600);
+}
+.tiquisec .title em {
+  color: #0088d1;
+}
+.tiquisec .lead {
+  color: #4f5d66;
+}
+.tiquisec__acciones {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* El globo de lo que dice Tiqui (lo mismo que dice en la tienda). */
+.globo {
+  position: relative;
+  max-width: 30ch;
+  margin-bottom: 18px;
+  padding: 14px 20px;
+  border-radius: 22px;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.45;
+  color: var(--marca-600);
+  background: #fff;
+  box-shadow: 0 18px 40px -20px rgba(0, 48, 73, 0.35);
+}
+.globo b {
+  color: var(--marca-400);
+}
+.globo::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 4px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+/* Lo que hace, en cuatro dibujos. Sin cajas: el dibujo, el título y ya. */
+.rasgos {
+  list-style: none;
+  padding: 0;
+  margin-top: clamp(64px, 9vw, 120px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 48px);
+}
+.rasgo__arte {
+  width: 116px;
+  margin-bottom: 14px;
+}
+.rasgo h3 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--marca-600);
+}
+.rasgo p {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4f5d66;
+}
+@media (max-width: 980px) {
+  .rasgos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 860px) {
+  .tiquisec__intro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tiquisec__ella {
+    width: min(240px, 60%);
+  }
+}
+@media (max-width: 520px) {
+  .rasgos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* El lugar de su presentación en video. */
+.tqvideo {
+  position: relative;
+  margin-top: clamp(64px, 9vw, 120px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  aspect-ratio: 16 / 7;
+  padding: clamp(24px, 4vw, 56px);
+  border-radius: 32px;
+  overflow: hidden;
+  color: #fff;
+  background: radial-gradient(700px 500px at 25% 50%, rgba(0, 154, 235, 0.35), transparent 65%), var(--marca-600);
+}
+.tqvideo__arte {
+  display: flex;
+  justify-content: center;
+}
+.tqvideo__ella {
+  width: min(260px, 70%);
+}
+.tqvideo__etiqueta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cielo-2);
+}
+.tqvideo__titulo {
+  margin: 10px 0 24px;
+  font-size: clamp(1.6rem, 3.4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+@media (max-width: 760px) {
+  .tqvideo {
+    grid-template-columns: minmax(0, 1fr);
+    aspect-ratio: auto;
+    text-align: center;
+  }
+  .tqvideo__ella {
+    width: min(180px, 55%);
+  }
+}
+
+/* ---------- Tiqui en el resto de la página ---------- */
+/* Tiqui asomada al pie de la tienda, del lado izquierdo, al frente. */
+.float--tiqui {
+  width: 25%;
+  left: -10%;
+  bottom: 2%;
+  z-index: 6;
+}
+.float--tiqui [data-tiqui] {
+  width: 100%;
+  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.55));
+}
+.hchip__tiqui {
+  width: 30px;
+  flex: none;
+}
+.voice__tiqui {
+  position: absolute;
+  top: 26px;
+  left: clamp(14px, 3vw, 30px);
+  width: clamp(72px, 12vw, 116px);
+}
+.cta__tiqui {
+  width: 84px;
+  margin: 26px auto 0;
+}
+
+/* ---------- Pie: legales y datos del negocio ---------- */
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  width: 100%;
+  font-size: 0.88rem;
+}
+.footer__legal a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+}
+.footer__legal a:hover {
+  color: #fff;
+}
+.footer__negocio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 32px;
+  width: 100%;
+  font-size: 0.85rem;
+}
+.footer__negocio dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.footer__negocio dd {
+  margin: 2px 0 0;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 /* ==========================================================
