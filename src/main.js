@@ -10,7 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { Flip } from 'gsap/Flip';
 
-import { STORE_URL, STORE_HOST, API_URL, TIQUI_VIDEO, LEGALES, reduceMotion, finePointer } from './config.js';
+import { STORE_URL, STORE_HOST, API_URL, TIQUI_VIDEO, TIQUI_POSTER, LEGALES, reduceMotion, finePointer } from './config.js';
 import { hydrateIcons, LOGO_MARK, icon } from './modules/icons.js';
 import { initScroll, scrollTo, stopScroll, startScroll } from './modules/scroll.js';
 import { initStore } from './modules/store.js';
@@ -423,7 +423,7 @@ function initTrailer() {
   if (botonTiqui && TIQUI_VIDEO) {
     botonTiqui.hidden = false;
     document.querySelector('[data-tiqui-video-estado]').textContent = 'Conózcala en un minuto.';
-    botonTiqui.addEventListener('click', () => open({ src: TIQUI_VIDEO, nombre: 'Presentación de Tiqui' }));
+    botonTiqui.addEventListener('click', () => open({ src: TIQUI_VIDEO, poster: TIQUI_POSTER, nombre: 'Presentación de Tiqui' }));
   }
   const close = () => {
     modalVideo.pause();

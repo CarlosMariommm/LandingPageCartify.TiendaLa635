@@ -12,12 +12,12 @@ export const STORE_HOST = 'cartify-tienda-la635.vercel.app';
 export const API_URL = 'https://cartify-tiendala635.onrender.com/api';
 
 /*
- * La presentación de Tiqui en video. Vacío mientras no esté lista (se está
- * esperando la voz de ElevenLabs): la sección muestra "Muy pronto". Cuando
- * exista, se copia a public/video/ y se pone aquí la ruta, por ejemplo
- * '/video/tiqui.mp4'; con eso aparece el botón para verla.
+ * La presentación de Tiqui en video (public/video/, 1 min 14 s). Vacío, la
+ * sección muestra "Muy pronto" y no hay botón; con la ruta, aparece el botón
+ * para verla. El MP4 va con "faststart": empieza a sonar sin bajarse entero.
  */
-export const TIQUI_VIDEO = '';
+export const TIQUI_VIDEO = '/video/tiqui.mp4';
+export const TIQUI_POSTER = '/video/tiqui-poster.jpg';
 
 // Los documentos legales viven en la tienda: aquí solo se enlazan.
 export const LEGALES = [
